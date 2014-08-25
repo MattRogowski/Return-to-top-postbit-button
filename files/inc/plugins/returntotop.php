@@ -1,8 +1,8 @@
 <?php
 /**
- * Return to top button 1.6
+ * Return to top postbit button 1.8
 
- * Copyright 2010 Matthew Rogowski
+ * Copyright 2014 Matthew Rogowski
 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,35 +29,45 @@ function returntotop_info()
 	return array(
 		"name" => "Return to top postbit button",
 		"description" => "Adds a 'Return to Top' button to the postbit.",
-		"website" => "http://mattrogowski.co.uk",
-		"author" => "MattRogowski",
+		"website" => "https://github.com/MattRogowski/Return-to-top-postbit-button",
+		"author" => "Matt Rogowski",
 		"authorsite" => "http://mattrogowski.co.uk",
-		"version" => "1.6",
-		"compatibility" => "16*",
+		"version" => "1.8",
+		"compatibility" => "16*,18*",
 		"guid" => "e17bff92da3df398d9d45a467afdd8f1"
 	);
 }
 
 function returntotop_activate()
 {
-	global $db;
+	global $mybb, $db;
 	
 	require_once MYBB_ROOT . "inc/adminfunctions_templates.php";
 	
 	returntotop_deactivate();
 	
 	$templates = array();
-	$templates[] = array(
-		"title" => "returntotop",
-		"template" => "<a href=\"#top\"><img src=\"{\$mybb->settings[\'bburl\']}/{\$theme[\'imgdir\']}/{\$lang->language}/postbit_top.gif\" border=\"0\" alt=\"Return to top\" /></a>"
-	);
+	if(substr($mybb->version, 0, 3) == '1.6')
+	{
+		$templates[] = array(
+			"title" => "returntotop",
+			"template" => "<a href=\"#top\"><img src=\"{\$mybb->settings['bburl']}/{\$theme['imgdir']}/{\$lang->language}/postbit_top.gif\" border=\"0\" alt=\"{\$lang->returntotop}\" /></a>"
+		);
+	}
+	elseif(substr($mybb->version, 0, 3) == '1.8')
+	{
+		$templates[] = array(
+			"title" => "returntotop",
+			"template" => "<a href=\"#top\" title=\"{\$lang->returntotop}\" class=\"postbit_top\"><span style=\"background-image: url('{\$theme['imgdir']}/top.png');\">{\$lang->returntotop}</span></a>"
+		);
+	}
 	foreach($templates as $template)
 	{
 		$insert = array(
-			"title" => $template['title'],
-			"template" => $template['template'],
+			"title" => $db->escape_string($template['title']),
+			"template" => $db->escape_string($template['template']),
 			"sid" => "-1",
-			"version" => "1600",
+			"version" => "1800",
 			"dateline" => TIME_NOW
 		);
 		$db->insert_query("templates", $insert);
@@ -86,6 +96,9 @@ function returntotop_deactivate()
 function returntotop(&$post) 
 {	
 	global $mybb, $lang, $theme, $templates;
+
+	$lang->load('returntotop');
+
 	eval("\$post['returntotop'] = \"".$templates->get('returntotop')."\";");
 }
 ?>
