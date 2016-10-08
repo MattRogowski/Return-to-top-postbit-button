@@ -1,8 +1,8 @@
 <?php
 /**
- * Return to top postbit button 1.8
+ * Return to top postbit button 1.8.0
 
- * Copyright 2014 Matthew Rogowski
+ * Copyright 2016 Matthew Rogowski
 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,10 +31,10 @@ function returntotop_info()
 		"description" => "Adds a 'Return to Top' button to the postbit.",
 		"website" => "https://github.com/MattRogowski/Return-to-top-postbit-button",
 		"author" => "Matt Rogowski",
-		"authorsite" => "http://mattrogowski.co.uk",
-		"version" => "1.8",
+		"authorsite" => "https://matt.rogow.ski",
+		"version" => "1.8.0",
 		"compatibility" => "16*,18*",
-		"guid" => "e17bff92da3df398d9d45a467afdd8f1"
+		"codename" => "returntotop"
 	);
 }
 
