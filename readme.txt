@@ -3,7 +3,7 @@ Description: Adds a 'Return to Top' button to the postbit.
 Website: https://github.com/MattRogowski/Return-to-top-postbit-button
 Author: Matt Rogowski
 Authorsite: https://matt.rogow.ski
-Version: 1.8.0
+Version: 1.8.1
 Compatibility: 1.6.x, 1.8.x
 Files: 4
 Templates added: 1
@@ -21,8 +21,9 @@ Go to ACP > Plugins > Activate
 
 Change Log:
 25/08/14 - v1.6 -> v.1.8 -> MyBB 1.8 compatible. Language file added. To upgrade, deactivate, reupload ./inc/plugins/returntotop.php, upload ./inc/languages/english/returntotop.php to ./inc/languages/english/ and ./images/top.png to ./images/ (for 1.8.x), activate.
+08/01/17 - v1.8.0 -> v1.8.1 -> Templates now cached. To upgrade, reupload ./inc/plugins/returntotop.php.
 
-Copyright 2016 Matthew Rogowski
+Copyright 2017 Matthew Rogowski
 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.

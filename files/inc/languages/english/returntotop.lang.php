@@ -1,8 +1,8 @@
 <?php
 /**
- * Return to top postbit button 1.8.0 - Language File
+ * Return to top postbit button 1.8.1 - Language File
 
- * Copyright 2016 Matthew Rogowski
+ * Copyright 2017 Matthew Rogowski
 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.

@@ -1,8 +1,8 @@
 <?php
 /**
- * Return to top postbit button 1.8.0
+ * Return to top postbit button 1.8.1
 
- * Copyright 2016 Matthew Rogowski
+ * Copyright 2017 Matthew Rogowski
 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,6 +24,14 @@ if(!defined("IN_MYBB"))
 
 $plugins->add_hook("postbit", "returntotop");
 
+global $templatelist;
+
+if($templatelist)
+{
+	$templatelist .= ',';
+}
+$templatelist .= 'returntotop';
+
 function returntotop_info()
 {
 	return array(
@@ -32,7 +40,7 @@ function returntotop_info()
 		"website" => "https://github.com/MattRogowski/Return-to-top-postbit-button",
 		"author" => "Matt Rogowski",
 		"authorsite" => "https://matt.rogow.ski",
-		"version" => "1.8.0",
+		"version" => "1.8.1",
 		"compatibility" => "16*,18*",
 		"codename" => "returntotop"
 	);
@@ -41,11 +49,11 @@ function returntotop_info()
 function returntotop_activate()
 {
 	global $mybb, $db;
-	
+
 	require_once MYBB_ROOT . "inc/adminfunctions_templates.php";
-	
+
 	returntotop_deactivate();
-	
+
 	$templates = array();
 	if(substr($mybb->version, 0, 3) == '1.6')
 	{
@@ -72,7 +80,7 @@ function returntotop_activate()
 		);
 		$db->insert_query("templates", $insert);
 	}
-	
+
 	find_replace_templatesets("postbit", '#'.preg_quote('{$post[\'button_report\']}').'#', '{$post[\'button_report\']}{$post[\'returntotop\']}');
 	find_replace_templatesets("postbit_classic", '#'.preg_quote('{$post[\'button_report\']}').'#', '{$post[\'button_report\']}{$post[\'returntotop\']}');
 }
@@ -80,21 +88,21 @@ function returntotop_activate()
 function returntotop_deactivate()
 {
 	global $db;
-	
+
 	require_once MYBB_ROOT . "inc/adminfunctions_templates.php";
-	
+
 	$templates = array(
 		"returntotop"
 	);
 	$templates = "'" . implode("','", $templates) . "'";
 	$db->delete_query("templates", "title IN ({$templates})");
-	
+
 	find_replace_templatesets("postbit", '#'.preg_quote('{$post[\'returntotop\']}').'#', '', 0);
 	find_replace_templatesets("postbit_classic", '#'.preg_quote('{$post[\'returntotop\']}').'#', '', 0);
 }
 
-function returntotop(&$post) 
-{	
+function returntotop(&$post)
+{
 	global $mybb, $lang, $theme, $templates;
 
 	$lang->load('returntotop');
